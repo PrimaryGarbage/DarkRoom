@@ -34,12 +34,12 @@ target_link_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/external/SFM
 ### Add include directories here ###
 target_include_directories(${PROJECT_NAME} PRIVATE external/SFML/include)
 
-### Uncomment this line if you want the standard libraries to be linked statically ###
-# target_link_options(${PROJECT_NAME} PRIVATE -static-libgcc -static-libstdc++)
 
 if (WIN32)
+    target_link_directories(${PROJECT_NAME} PRIVATE external/SFML/extlibs/libs-msvc-universal/x64)
     target_link_libraries(${PROJECT_NAME} opengl32 winmm gdi32 freetype openal32 vorbisenc vorbisfile vorbis ogg)
 elseif (UNIX)
+    target_link_directories(${PROJECT_NAME} PRIVATE external/SFML/extlibs/libs-mingw/x64)
     target_link_libraries(${PROJECT_NAME} freetype X11 Xrandr Xcursor udev GL ogg vorbis vorbisenc vorbisfile openal pthread)
 else()
     message(FATAL_ERROR "Build is only possible on linux or windows system.")
@@ -50,4 +50,5 @@ if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
     target_link_libraries(${PROJECT_NAME} sfml-graphics-s-d sfml-window-s-d sfml-system-s-d sfml-audio-s-d)
 else()
     target_link_libraries(${PROJECT_NAME} sfml-graphics-s sfml-window-s sfml-system-s sfml-audio-s)
+    target_link_options(${PROJECT_NAME} PRIVATE -static-libgcc -static-libstdc++)
 endif()

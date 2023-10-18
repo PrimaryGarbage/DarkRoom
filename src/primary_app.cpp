@@ -1,8 +1,9 @@
+#define SFML_STATIC
+
 #include "SFML/Graphics.hpp"
 #include "primary_app.hpp"
 #include "logger.hpp"
 #include "prim_exception.hpp"
-
 
 namespace prim
 {
